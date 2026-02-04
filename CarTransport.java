@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.Stack;
 
-public class CarTransport extends Car{
+public class CarTransport extends Car implements ICarStorage{
     private Stack<Car> carList = new Stack<>();
     private boolean rampUp;
     private final int capacity;
@@ -51,25 +51,30 @@ public class CarTransport extends Car{
 
     public void loadCar(Car car){
         if (carList.size() == capacity){
-            IO.println("Cannot load more cars");
+            IO.println("Cannot load more cars!");
+        } else if (this.rampUp){
+            IO.println("Cannot load car, the ramp is up!");
         } else if (car.getWeight() >= 3){
             IO.println("That car is too big!");
         } else if (Math.pow(Math.pow(car.getX() - this.getX(), 2)+Math.pow(car.getY() - this.getY(), 2), 0.5) >= 10){
             IO.println("This car is too far away!");
-        }
-        else{
+        } else{
             carList.push(car);
             car.setX(this.getX());
             car.setY(this.getY());
         }
     }
 
-    public void unloadCar(){
+    public void unloadCar(Car car){
         if (carList.isEmpty()){
             IO.println("There are no cars to unload!");
+        } else if (this.rampUp) {
+            IO.println("Cannot unload car, the ramp is up!");
+        } else if (carList.lastElement() != car){
+            IO.println("Cannot unload car, other cars in the way!");
         }
         else {
-            Car car = carList.pop();
+            carList.pop();
             double randNum = Math.random()*10;
             car.setX(this.getX() + randNum);
             car.setY(this.getY() + randNum);
