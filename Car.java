@@ -9,8 +9,9 @@ public abstract class Car implements Movable{
     private int angle;
     private double posX;
     private double posY;
+    private final double weight;
 
-    public Car(int nr, double ep, Color col, String model){
+    public Car(int nr, double ep, Color col, String model, double w){
         nrDoors = nr;
         enginePower = ep;
         color = col;
@@ -19,6 +20,7 @@ public abstract class Car implements Movable{
         posX = 0;
         posY = 0;
         stopEngine();
+        weight = w;
     }
 
     public String getModelName() {
@@ -60,11 +62,23 @@ public abstract class Car implements Movable{
         return this.posY;
     }
 
+    public void setX(double x){
+        this.posX = x;
+    }
+
+    public void setY(double y){
+        this.posY = y;
+    }
+
     public int getAngle(){
         return this.angle;
     }
     
     protected abstract double speedFactor();
+
+    public double getWeight(){
+        return this.weight;
+    }
 
     protected void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);

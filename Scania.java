@@ -5,7 +5,7 @@ public class Scania extends Car {
     private double truckBedAngle;
 
     public Scania(){
-        super(2, 500, Color.GRAY, "Scania");
+        super(2, 500, Color.GRAY, "Scania", 30);
         this.truckBedAngle = 0;
     }
 
