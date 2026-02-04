@@ -1,4 +1,7 @@
-public interface ICarStorage {
-    void loadCar(Car car);
-    void unloadCar(Car car);
+import java.util.Vector;
+
+public interface ICarStorage<T extends Car> {
+    void addCar(T car);
+    void removeCar(T car);
+    Vector<T> getCars();
 }
