@@ -21,6 +21,10 @@ public class CarTransport extends Truck implements ICarStorage<Car> {
     @Override
     public void move() {
         super.move();
+        for (Car car : this.getCars()){
+            car.setX(this.getX());
+            car.setY(this.getY());
+        }
     }
     public int getCarCount() { return cars.size(); }
     public Vector<Car> getCars() { return (Vector<Car>) cars.clone(); }
