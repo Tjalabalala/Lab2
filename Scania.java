@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Truck {
+public class Scania extends Truck implements hasTruckbed{
     private double truckBedAngle = 0;
 
     public Scania(){

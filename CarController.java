@@ -31,6 +31,9 @@ public class CarController {
 
         cc.cars.add(new Volvo240());
 
+        cc.cars.add(new Saab95());
+        cc.cars.get(1).setY(100);
+
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
@@ -43,13 +46,21 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            int[] x = new int[cars.size()];
+            int[] y = new int[cars.size()];
             for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+                if ((car.getX() >= 700 && car.getAngle() == 0) || (car.getX() <= 0 && Math.abs(car.getAngle()) == 180)){
+                    car.turnRight();
+                    car.turnRight();
+                }
+                else {
+                    car.move();
+                    x[cars.indexOf(car)] = (int) Math.round(car.getX());
+                    y[cars.indexOf(car)] = (int) Math.round(car.getY());
+                    frame.drawPanel.moveit(x, y);
+                    // repaint() calls the paintComponent method of the panel
+                    frame.drawPanel.repaint();
+                }
             }
         }
     }
@@ -79,6 +90,32 @@ public class CarController {
     void stopEngine(){
         for (Car car : cars){
             car.stopEngine();
+        }
+    }
+
+    void turboOn(){
+        for (Car car : cars){
+            if (car instanceof hasTurbo turboCar){
+                turboCar.setTurboOn();
+            }
+        }
+    }
+
+    void turboOff(){
+        for (Car car : cars){
+            if (car instanceof hasTurbo turboCar) turboCar.setTurboOff();
+        }
+    }
+
+    void lowerBed(){
+        for (Car car : cars){
+            if (car instanceof  hasTruckbed truck) truck.setTruckBedAngle(0);
+        }
+    }
+
+    void raiseBed(){
+        for (Car car : cars){
+            if (car instanceof hasTruckbed truck) truck.setTruckBedAngle(70);
         }
     }
 }

@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -11,16 +12,22 @@ public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
+    BufferedImage saabImage;
+    ArrayList<BufferedImage> imageList = new ArrayList<>();
     // To keep track of a single car's position
     Point volvoPoint = new Point();
+    Point saabPoint = new Point();
+    ArrayList<Point> pointList = new ArrayList<>();
 
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
     // TODO: Make this general for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+    void moveit(int[] x, int[] y){
+        for (int i = 0; i < x.length; i++){
+            pointList.get(i).x = x[i];
+            pointList.get(i).y = y[i];
+        }
     }
 
     // Initializes the panel and reads the images
@@ -37,7 +44,14 @@ public class DrawPanel extends JPanel{
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
+            imageList.add(volvoImage);
+            imageList.add(saabImage);
+            imageList.add(volvoWorkshopImage);
+            pointList.add(new Point());
+            pointList.add(new Point(100, 100));
+            pointList.add(new Point(300, 300));
         } catch (IOException ex)
         {
             ex.printStackTrace();
@@ -50,7 +64,10 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        for (int i = 0; i < imageList.size(); i++){
+            g.drawImage(imageList.get(i),pointList.get(i).x, pointList.get(i).y, null);
+        }
+        //g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null);  see javadoc for more info on the parameters
+        //g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
     }
 }
