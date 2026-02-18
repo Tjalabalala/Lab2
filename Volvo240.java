@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Volvo240 extends Car{
+public class Volvo240 extends Car implements IDrawable {
 
     private final static double trimFactor = 1.25;
     
@@ -12,5 +12,8 @@ public class Volvo240 extends Car{
         return getEnginePower() * 0.01 * trimFactor;
     }
 
+    public int getWidth() { return 100; }
+    public int getHeight() { return 60; }
+    public String getImagePath() { return "pics/Volvo240.jpg"; }
 
 }

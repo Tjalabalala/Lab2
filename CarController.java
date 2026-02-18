@@ -22,23 +22,29 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<IDrawable> drawables = new ArrayList<>();
+
+    private <T extends Car & IDrawable> void add_car(T car) {
+        cars.add(car);
+        drawables.add(car);
+    }
 
     //methods:
-
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
+        cc.add_car(new Volvo240());
+        cc.add_car(new Saab95());
+        cc.add_car(new Scania());
 
-        cc.cars.add(new Saab95());
-        cc.cars.get(1).setY(100);
+        cc.cars.get(1).setY(100); // Saab95
+        cc.cars.get(2).setY(200); // Scania
 
-        cc.cars.add(new Scania());
-        cc.cars.get(2).setY(200);
+        cc.drawables.add(new Workshop<Volvo240>(5));
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame = new CarView("CarSim 1.0", cc, cc.drawables);
 
         // Start the timer
         cc.timer.start();
@@ -60,7 +66,6 @@ public class CarController {
                 x[cars.indexOf(car)] = (int) Math.round(car.getX());
                 y[cars.indexOf(car)] = (int) Math.round(car.getY());
             }
-            frame.drawPanel.moveit(x, y);
             frame.drawPanel.repaint();
         }
     }

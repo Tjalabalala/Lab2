@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-public class Workshop<CarType extends Car> implements ICarStorage<CarType> {
+public class Workshop<CarType extends Car> implements ICarStorage<CarType>, IDrawable {
     private final int capacity;
     public int getCapacity() { return capacity; }
 
@@ -26,4 +26,9 @@ public class Workshop<CarType extends Car> implements ICarStorage<CarType> {
         return (Vector<CarType>) cars.clone();
     }
 
+    public double getX() { return 300; }
+    public double getY() { return 300; }
+    public int getWidth() { return 101; }
+    public int getHeight() { return 96; }
+    public String getImagePath() { return "pics/volvoBrand.jpg"; }
 }
