@@ -4,9 +4,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /*
-* This class represents the Controller part in the MVC pattern.
-* Its responsibilities is to listen to the View and responds in a appropriate manner by
-* modifying the model state and the updating the view.
+ * This class represents the Controller part in the MVC pattern.
+ * Its responsibilities is to listen to the View and responds in a appropriate manner by
+ * modifying the model state and the updating the view.
  */
 
 public class CarController {
@@ -41,7 +41,7 @@ public class CarController {
         cc.cars.get(1).setY(100); // Saab95
         cc.cars.get(2).setY(200); // Scania
 
-        cc.drawables.add(new Workshop<Volvo240>(5));
+        cc.drawables.add(new Workshop<Volvo240>(5, Volvo240.class));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc, cc.drawables);
@@ -51,20 +51,16 @@ public class CarController {
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
+     * view to update its images. Change this method to your needs.
+     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            int[] x = new int[cars.size()];
-            int[] y = new int[cars.size()];
             for (Car car : cars) {
                 if ((car.getX() >= 700 && car.getAngle() == 0) || (car.getX() <= 0 && Math.abs(car.getAngle()) == 180)){
                     car.turnRight();
                     car.turnRight();
                 }
                 else car.move();
-                x[cars.indexOf(car)] = (int) Math.round(car.getX());
-                y[cars.indexOf(car)] = (int) Math.round(car.getY());
             }
             frame.drawPanel.repaint();
         }
@@ -74,7 +70,7 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Car car : cars
-                ) {
+        ) {
             car.gas(gas);
         }
     }
@@ -119,6 +115,7 @@ public class CarController {
     }
 
     void raiseBed(){
+        Workshop<Volvo240> minVerkstad = new Workshop<>(5, Volvo240.class);
         for (Car car : cars){
             if (car instanceof hasTruckbed truck) truck.setTruckBedAngle(70);
         }
