@@ -115,7 +115,6 @@ public class CarController {
     }
 
     void raiseBed(){
-        Workshop<Volvo240> minVerkstad = new Workshop<>(5, Volvo240.class);
         for (Car car : cars){
             if (car instanceof hasTruckbed truck) truck.setTruckBedAngle(70);
         }
