@@ -21,16 +21,21 @@ public class Workshop<CarType extends Car> implements ICarStorage<CarType>, IDra
         cars.remove(car);
     }
 
-    public void tryToLoadCar(Car car) {
+    public boolean tryToLoadCar(Car car) {
         if (model.isInstance(car)) {       // type check
             CarType typedCar = model.cast(car);  // safe cast internally
-            this.addCar(typedCar);
+            return  this.addCar(typedCar);
         }
+        return false;
     }
 
-    public void addCar(CarType car) {
-        if (cars.size() >= capacity) IO.println("Max capacity reached");
+    public boolean addCar(CarType car) {
+        if (cars.size() >= capacity){
+            IO.println("Max capacity reached");
+            return false;
+        }
         else cars.add(car);
+        return true;
     }
 
     public Class<CarType> getModel(){

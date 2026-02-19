@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /*
@@ -25,6 +26,8 @@ public class CarController {
     ArrayList<IDrawable> drawables = new ArrayList<>();
     ArrayList<Workshop> workshops = new ArrayList<>();
 
+    static CarController cc;
+
     private <T extends Car & IDrawable> void add_car(T car) {
         cars.add(car);
         drawables.add(car);
@@ -33,17 +36,19 @@ public class CarController {
     //methods:
     public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
+        cc = new CarController();
 
         cc.add_car(new Volvo240());
         cc.add_car(new Saab95());
         cc.add_car(new Scania());
 
+        cc.cars.get(0).setY(300);
         cc.cars.get(1).setY(100); // Saab95
         cc.cars.get(2).setY(200); // Scania
 
-        Workshop volvoWorkshop = new Workshop<Volvo240>(5, Volvo240.class);
+        Workshop<Volvo240> volvoWorkshop = new Workshop<Volvo240>(5, Volvo240.class);
         cc.drawables.add(volvoWorkshop);
+        cc.workshops.add(volvoWorkshop);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc, cc.drawables);
@@ -65,6 +70,16 @@ public class CarController {
                 else car.move();
             }
             for (Workshop workshop : workshops) {
+                ArrayList<Car> tempList = new ArrayList<>();
+                for (Car car: cars){
+                    if (car instanceof IDrawable drawableCar
+                            && workshop.overlaps(drawableCar)
+                            && workshop.tryToLoadCar(car)) {
+                        cc.drawables.remove(car);
+                        tempList.add(car);
+                    }
+                }
+                for (Car car : tempList) cars.remove(car);
             }
             frame.drawPanel.repaint();
         }

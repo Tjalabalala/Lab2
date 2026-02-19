@@ -36,7 +36,7 @@ public class CarTransport extends Truck implements ICarStorage<Car> {
             IO.println("Can't lower ramp while the vehicle is in motion");
         else this.ramp = state;
     }
-    public void addCar(Car car){
+    public boolean addCar(Car car){
         if (cars.size() >= capacity) IO.println("Cannot load more cars!");
         else if (getRamp() == RampState.UP) IO.println("Cannot load car, the ramp is up!");
         else if (car.getWeight() >= 3) IO.println("That car is too big!");
@@ -46,7 +46,9 @@ public class CarTransport extends Truck implements ICarStorage<Car> {
             cars.push(car);
             car.setX(this.getX());
             car.setY(this.getY());
+            return true;
         }
+        return false;
     }
     public void removeCar(Car car){
         if (cars.isEmpty()) IO.println("There are no cars to unload!");
