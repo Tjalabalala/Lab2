@@ -13,11 +13,9 @@ public interface IDrawable {
     public static class ImageCache {
         private static HashMap<String, BufferedImage> images = new HashMap<>();
         public static BufferedImage fetchImage(String path) {
-            if (images.containsKey(path))
-                return images.get(path);
-
             try {
-                images.put(path, ImageIO.read(DrawPanel.class.getResourceAsStream(path)));
+                if (!images.containsKey(path))
+                    images.put(path, ImageIO.read(DrawPanel.class.getResourceAsStream(path)));
                 return images.get(path);
             } catch (IOException ex)
             {

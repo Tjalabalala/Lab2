@@ -20,9 +20,10 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    // A list of cars, modify if needed
+
     ArrayList<Car> cars = new ArrayList<>();
     ArrayList<IDrawable> drawables = new ArrayList<>();
+    ArrayList<Workshop> workshops = new ArrayList<>();
 
     private <T extends Car & IDrawable> void add_car(T car) {
         cars.add(car);
@@ -41,7 +42,8 @@ public class CarController {
         cc.cars.get(1).setY(100); // Saab95
         cc.cars.get(2).setY(200); // Scania
 
-        cc.drawables.add(new Workshop<Volvo240>(5, Volvo240.class));
+        Workshop volvoWorkshop = new Workshop<Volvo240>(5, Volvo240.class);
+        cc.drawables.add(volvoWorkshop);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc, cc.drawables);
@@ -61,6 +63,8 @@ public class CarController {
                     car.turnRight();
                 }
                 else car.move();
+            }
+            for (Workshop workshop : workshops) {
             }
             frame.drawPanel.repaint();
         }
