@@ -1,0 +1,5 @@
+Skapa gemensamt IVehicle interface och flytta över specifikation från nuvarande Car
+Skapa Vehicle helper class som har default implementering för IVehicle (flytta implementering ifrån car), både Truck samt Car borde implementa IVehicle genom en private instancs variabel samt delegering, vehicle implementar IMovable
+Nya car klassen bör enbart utföra delegering samt hantera nrDoors
+Nya Truck klassen bör enbart hantera nrDoors, speedFactor samt canMove (speedFactor och canMove flyttas över från den gamla truck klassen)
+Pga seperation of concern borde actionPerformed delas upp i två methods
