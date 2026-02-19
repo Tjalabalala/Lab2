@@ -21,7 +21,7 @@ public class Workshop<CarType extends Car> implements ICarStorage<CarType>, IDra
         cars.remove(car);
     }
 
-    public void tryLoad(Car car) {
+    public void tryToLoadCar(Car car) {
         if (model.isInstance(car)) {       // type check
             CarType typedCar = model.cast(car);  // safe cast internally
             this.addCar(typedCar);
