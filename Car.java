@@ -1,117 +1,98 @@
 import java.awt.*;
 
-public abstract class Car implements Movable{
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private String modelName; // The car model name
-    private int angle;
-    private double posX;
-    private double posY;
-    private final double weight;
+public abstract class Car implements IVehicle, Movable {
+    private int nrDoors;
+    private Vehicle vehicle;
 
-    public Car(int nr, double ep, Color col, String model, double w){
-        nrDoors = nr;
-        enginePower = ep;
-        color = col;
-        modelName = model;
-        angle = 0;
-        posX = 0;
-        posY = 0;
-        stopEngine();
-        weight = w;
+    public int getNrDoors() {
+        return nrDoors;
+    }
+
+    public Car(int nr, double ep, Color col, String model, double w) {
+        vehicle = new Vehicle(nr, ep, col, model, w);
     }
 
     public String getModelName() {
-        return modelName;
+        return vehicle.getModelName();
     }
 
-    public int getNrDoors(){
-        return nrDoors;
-    }
-    public double getEnginePower(){
-        return enginePower;
+    public double getEnginePower() {
+        return vehicle.getEnginePower();
     }
 
-    public double getCurrentSpeed(){
-        return currentSpeed;
+    public double getCurrentSpeed() {
+        return vehicle.getCurrentSpeed();
     }
 
-    public Color getColor(){
-        return color;
+    public Color getColor() {
+        return vehicle.getColor();
     }
 
-    public void setColor(Color clr){
-        color = clr;
+    public void setColor(Color clr) {
+        vehicle.setColor(clr);
     }
 
-    public void startEngine(){
-        currentSpeed = 0.1;
+    public void startEngine() {
+        vehicle.startEngine();
     }
 
-    public void stopEngine(){
-        currentSpeed = 0;
+    public void stopEngine() {
+        vehicle.stopEngine();
     }
 
-    public double getX(){
-        return this.posX;
+    public double getX() {
+        return vehicle.getX();
     }
 
-    public double getY(){
-        return this.posY;
+    public double getY() {
+        return vehicle.getY();
     }
 
-    public void setX(double x){
-        this.posX = x;
+    public void setX(double x) {
+        vehicle.setX(x);
     }
 
-    public void setY(double y){
-        this.posY = y;
+    public void setY(double y) {
+        vehicle.setY(y);
     }
 
-    public int getAngle(){
-        return this.angle;
-    }
-    
-    protected abstract double speedFactor();
-
-    public double getWeight(){
-        return this.weight;
+    public int getAngle() {
+        return vehicle.getAngle();
     }
 
-    protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+    public double getWeight() {
+        return vehicle.getWeight();
     }
 
-    protected void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-    public void gas(double amount){
-        if (amount >= 0 && amount <= 1)
-            incrementSpeed(amount);
+    public void incrementSpeed(double amount) {
+        vehicle.incrementSpeed(amount);
     }
 
-    public void brake(double amount){
-        if (amount >= 0 && amount <= 1)
-            decrementSpeed(amount);
+    public void decrementSpeed(double amount) {
+        vehicle.decrementSpeed(amount);
     }
 
-    @Override
-    public void move(){
-        this.posX += this.getCurrentSpeed() * Math.cos(Math.toRadians(getAngle()));
-        this.posY += this.getCurrentSpeed() * Math.sin(Math.toRadians(getAngle()));
+    public void gas(double amount) {
+        vehicle.gas(amount);
     }
 
-    @Override
+    public void brake(double amount) {
+        vehicle.brake(amount);
+    }
+
+    public double speedFactor() {
+        return vehicle.speedFactor();
+    }
+
+    public void move() {
+        vehicle.move();
+    }
+
     public void turnRight(){
-        this.angle = (getAngle() - 90)%360;
+        vehicle.turnRight();
     }
 
-    @Override
     public void turnLeft(){
-        this.angle = (getAngle() + 90)%360;
+        vehicle.turnLeft();
     }
-    
-
 }
