@@ -85,7 +85,7 @@ public class Vehicle implements Movable {
     }
 
     public double speedFactor() {
-        return this.speedfactor;
+        return speedfactor;
     }
 
     public void incrementSpeed(double amount) {

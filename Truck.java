@@ -3,7 +3,12 @@ import java.awt.*;
 public abstract class Truck implements IVehicle, Movable {
 
     public Truck(int nr, double ep, Color col, String model, double w){
-        vehicle = new Vehicle(nr, ep, col, model, w);
+        vehicle = new Vehicle(nr, ep, col, model, w){
+            @Override
+            public double speedFactor(){
+                return Truck.this.speedFactor();
+            }
+        };
     }
 
     private Vehicle vehicle;

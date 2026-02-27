@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -22,13 +23,13 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
 
-    ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<IVehicle> cars = new ArrayList<>();
     ArrayList<IDrawable> drawables = new ArrayList<>();
     ArrayList<Workshop> workshops = new ArrayList<>();
 
     static CarController cc;
 
-    private <T extends Car & IDrawable> void add_car(T car) {
+    private <T extends IVehicle & IDrawable> void add_car(T car) {
         cars.add(car);
         drawables.add(car);
     }
@@ -62,33 +63,42 @@ public class CarController {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                if ((car.getX() >= 700 && car.getAngle() == 0) || (car.getX() <= 0 && Math.abs(car.getAngle()) == 180)){
-                    car.turnRight();
-                    car.turnRight();
-                }
-                else car.move();
+            ListIterator<IVehicle> iter = cars.listIterator();
+
+            while(iter.hasNext()) {
+                IVehicle car = iter.next();
+                checkBorderCollision(car);
+                if(checkWorkshopCollision(car)) iter.remove();
             }
-            for (Workshop workshop : workshops) {
-                ArrayList<Car> tempList = new ArrayList<>();
-                for (Car car: cars){
-                    if (car instanceof IDrawable drawableCar
-                            && workshop.overlaps(drawableCar)
-                            && workshop.tryToLoadCar(car)) {
-                        cc.drawables.remove(car);
-                        tempList.add(car);
-                    }
-                }
-                for (Car car : tempList) cars.remove(car);
-            }
+            //IO.println(cars.get(0).getCurrentSpeed());
             frame.drawPanel.repaint();
         }
+    }
+
+    private boolean checkWorkshopCollision(IVehicle car) {
+        for (Workshop workshop : workshops) {
+            if (car instanceof IDrawable drawableCar
+                    && workshop.overlaps(drawableCar)
+                    && workshop.tryToLoadCar(car)) {
+                cc.drawables.remove(car);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkBorderCollision(IVehicle car) {
+        if ((car.getX() >= 700 && car.getAngle() == 0) || (car.getX() <= 0 && Math.abs(car.getAngle()) == 180)){
+            car.turnRight();
+            car.turnRight();
+        }
+        else car.move();
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars
+        for (IVehicle car : cars
         ) {
             car.gas(gas);
         }
@@ -96,25 +106,25 @@ public class CarController {
 
     void brake(int amount){
         double brake = ((double) amount) / 100;
-        for (Car car : cars){
+        for (IVehicle car : cars){
             car.brake(brake);
         }
     }
 
     void startEngine(){
-        for (Car car: cars){
+        for (IVehicle car: cars){
             car.startEngine();
         }
     }
 
     void stopEngine(){
-        for (Car car : cars){
+        for (IVehicle car : cars){
             car.stopEngine();
         }
     }
 
     void turboOn(){
-        for (Car car : cars){
+        for (IVehicle car : cars){
             if (car instanceof hasTurbo turboCar){
                 turboCar.setTurboOn();
             }
@@ -122,19 +132,19 @@ public class CarController {
     }
 
     void turboOff(){
-        for (Car car : cars){
+        for (IVehicle car : cars){
             if (car instanceof hasTurbo turboCar) turboCar.setTurboOff();
         }
     }
 
     void lowerBed(){
-        for (Car car : cars){
+        for (IVehicle car : cars){
             if (car instanceof  hasTruckbed truck) truck.setTruckBedAngle(0);
         }
     }
 
     void raiseBed(){
-        for (Car car : cars){
+        for (IVehicle car : cars){
             if (car instanceof hasTruckbed truck) truck.setTruckBedAngle(70);
         }
     }

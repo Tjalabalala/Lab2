@@ -12,6 +12,7 @@ public class Saab95 extends Car implements hasTurbo, IDrawable {
         super(2, 125, Color.red, "Saab95", 1.2);
     }
 
+    @Override
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;

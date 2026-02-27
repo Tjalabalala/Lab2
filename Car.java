@@ -9,7 +9,12 @@ public abstract class Car implements IVehicle, Movable {
     }
 
     public Car(int nr, double ep, Color col, String model, double w) {
-        vehicle = new Vehicle(nr, ep, col, model, w);
+        vehicle = new Vehicle(nr, ep, col, model, w){
+            @Override
+            public double speedFactor(){
+                return Car.this.speedFactor();
+            }
+        };
     }
 
     public String getModelName() {
