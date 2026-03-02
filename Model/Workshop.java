@@ -54,5 +54,5 @@ public class Workshop<CarType extends Car> implements ICarStorage<CarType>, IDra
     public double getY() { return 300; }
     public int getWidth() { return 101; }
     public int getHeight() { return 96; }
-    public String getImagePath() { return "pics/volvoBrand.jpg"; }
+    public String getImagePath() { return "/pics/volvoBrand.jpg"; }
 }

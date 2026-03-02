@@ -16,6 +16,6 @@ public class Volvo240 extends Car implements IDrawable {
 
     public int getWidth() { return 100; }
     public int getHeight() { return 60; }
-    public String getImagePath() { return "pics/Volvo240.jpg"; }
+    public String getImagePath() { return "/pics/Volvo240.jpg"; }
 
 }

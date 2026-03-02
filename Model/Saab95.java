@@ -5,7 +5,7 @@ import java.awt.*;
 public class Saab95 extends Car implements hasTurbo, IDrawable {
     public int getWidth() { return 100; }
     public int getHeight() { return 60; }
-    public String getImagePath() { return "pics/Saab95.jpg"; }
+    public String getImagePath() { return "/pics/Saab95.jpg"; }
 
     private boolean turboOn;
     

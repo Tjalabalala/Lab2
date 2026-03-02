@@ -21,7 +21,7 @@ public class Scania extends Truck implements hasTruckbed, IDrawable {
 
     public int getWidth() { return 100; }
     public int getHeight() { return 60; }
-    public String getImagePath() { return "pics/Scania.jpg"; }
+    public String getImagePath() { return "/pics/Scania.jpg"; }
 
     @Override
     protected boolean canMove() {

@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class VehicleSet {
     private ArrayList<IVehicle> vehicles = new ArrayList<>();
@@ -12,9 +13,18 @@ public class VehicleSet {
     }
 
     public void gasAll(double amount){
+        double gas = ((double) amount) / 100;
         for (IVehicle vehicle: vehicles){
-            vehicle.gas(amount);
+            vehicle.gas(gas);
         }
+    }
+
+    public ArrayList<IVehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public IVehicle get(int index){
+        return this.vehicles.get(index);
     }
 
     public void moveAll(){
@@ -43,5 +53,51 @@ public class VehicleSet {
 
     public void removeListener(ModelListener listener){
         actionListeners.remove(listener);
+    }
+
+    public void brakeAll(double amount){
+        double brake = amount / 100;
+        for (IVehicle vehicle : vehicles){
+            vehicle.brake(brake);
+        }
+        IO.println("hej");
+    }
+
+    public void startAllEngines(){
+        for (IVehicle vehicle : vehicles){
+            vehicle.startEngine();
+        }
+    }
+
+    public void stopAllEngines(){
+        for (IVehicle vehicle : vehicles){
+            vehicle.stopEngine();
+        }
+    }
+
+    public void turboOn(){
+        for (IVehicle vehicle : vehicles){
+            if (vehicle instanceof hasTurbo turboCar){
+                turboCar.setTurboOn();
+            }
+        }
+    }
+
+    public void turboOff(){
+        for (IVehicle vehicle : vehicles){
+            if (vehicle instanceof hasTurbo turboCar) turboCar.setTurboOff();
+        }
+    }
+
+    public void lowerBed(){
+        for (IVehicle vehicle : vehicles){
+            if (vehicle instanceof  hasTruckbed truck) truck.setTruckBedAngle(0);
+        }
+    }
+
+    public void raiseBed(){
+        for (IVehicle vehicle : vehicles){
+            if (vehicle instanceof hasTruckbed truck) truck.setTruckBedAngle(70);
+        }
     }
 }
