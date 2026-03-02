@@ -60,7 +60,6 @@ public class VehicleSet {
         for (IVehicle vehicle : vehicles){
             vehicle.brake(brake);
         }
-        IO.println("hej");
     }
 
     public void startAllEngines(){
