@@ -1,3 +1,6 @@
+package Tests;
+
+import Model.Volvo240;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

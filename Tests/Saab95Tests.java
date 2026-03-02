@@ -1,3 +1,6 @@
+package Tests;
+
+import Model.Saab95;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,7 +19,7 @@ public class Saab95Tests {
         assertEquals(new Color(255, 0, 0), saab95.getColor());
         assertEquals(1.25, saab95.speedFactor());
         assertEquals(125, saab95.getEnginePower());
-        assertEquals("Saab95", saab95.getModelName());
+        assertEquals("Model.Saab95", saab95.getModelName());
 
         saab95.setTurboOn();
         assertEquals(1.25*1.3, saab95.speedFactor());

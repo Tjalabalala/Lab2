@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 
 public class Volvo240 extends Car implements IDrawable {
@@ -5,7 +7,7 @@ public class Volvo240 extends Car implements IDrawable {
     private final static double trimFactor = 1.25;
     
     public Volvo240(){
-        super(4,100, Color.black, "Volvo240", 1.2);
+        super(4,100, Color.black, "Model.Volvo240", 1.2);
     }
 
     public double speedFactor(){

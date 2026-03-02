@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 
 public interface IVehicle extends Movable {
@@ -25,4 +27,5 @@ public interface IVehicle extends Movable {
     public void decrementSpeed(double amount);
     public void gas(double amount);
     public void brake(double amount);
+    public void checkBorderCollision(int width);
 }

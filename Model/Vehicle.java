@@ -1,4 +1,7 @@
+package Model;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Vehicle implements Movable {
     private int nrDoors; // Number of doors on the car
@@ -11,6 +14,7 @@ public class Vehicle implements Movable {
     private double posY;
     private final double weight;
     private double speedfactor;
+
 
     public Vehicle(int nr, double ep, Color col, String model, double w) {
         nrDoors = nr;
@@ -116,4 +120,13 @@ public class Vehicle implements Movable {
     public void turnLeft(){
         this.angle = (getAngle() + 90)%360;
     }
+
+    public void checkBorderCollision(int width){
+        if ((this.getX() >= width && this.getAngle() == 0) || (this.getX() <= 0 && Math.abs(this.getAngle()) == 180)){
+            this.turnRight();
+            this.turnRight();
+        }
+        else this.move();
+    }
+
 }

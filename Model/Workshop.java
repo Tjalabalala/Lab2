@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.Vector;
 
 public class Workshop<CarType extends Car> implements ICarStorage<CarType>, IDrawable {

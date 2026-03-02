@@ -1,7 +1,8 @@
+import Model.*;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -44,8 +45,8 @@ public class CarController {
         cc.add_car(new Scania());
 
         cc.cars.get(0).setY(300);
-        cc.cars.get(1).setY(100); // Saab95
-        cc.cars.get(2).setY(200); // Scania
+        cc.cars.get(1).setY(100); // Model.Saab95
+        cc.cars.get(2).setY(200); // Model.Scania
 
         Workshop<Volvo240> volvoWorkshop = new Workshop<Volvo240>(5, Volvo240.class);
         cc.drawables.add(volvoWorkshop);
@@ -67,7 +68,7 @@ public class CarController {
 
             while(iter.hasNext()) {
                 IVehicle car = iter.next();
-                checkBorderCollision(car);
+                car.checkBorderCollision(700);
                 if(checkWorkshopCollision(car)) iter.remove();
             }
             //IO.println(cars.get(0).getCurrentSpeed());
@@ -85,14 +86,6 @@ public class CarController {
             }
         }
         return false;
-    }
-
-    private void checkBorderCollision(IVehicle car) {
-        if ((car.getX() >= 700 && car.getAngle() == 0) || (car.getX() <= 0 && Math.abs(car.getAngle()) == 180)){
-            car.turnRight();
-            car.turnRight();
-        }
-        else car.move();
     }
 
     // Calls the gas method for each car once

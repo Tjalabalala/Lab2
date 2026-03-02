@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 
 public abstract class Car implements IVehicle, Movable {
@@ -100,4 +102,9 @@ public abstract class Car implements IVehicle, Movable {
     public void turnLeft(){
         vehicle.turnLeft();
     }
+
+    public void checkBorderCollision(int width){
+        vehicle.checkBorderCollision(width);
+    }
+
 }

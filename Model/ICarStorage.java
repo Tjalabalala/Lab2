@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.Vector;
 
 public interface ICarStorage<T extends Car> {

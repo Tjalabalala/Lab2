@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 
 public abstract class Truck implements IVehicle, Movable {
@@ -97,5 +99,9 @@ public abstract class Truck implements IVehicle, Movable {
 
     public void brake(double amount){
         vehicle.brake(amount);
+    }
+
+    public void checkBorderCollision(int width){
+        vehicle.checkBorderCollision(width);
     }
 }

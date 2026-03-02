@@ -1,6 +1,10 @@
+package Tests;
+
+import Model.Car;
+import Model.CarTransport;
+import Model.Saab95;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.Vector;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

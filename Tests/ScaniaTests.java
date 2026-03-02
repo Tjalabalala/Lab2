@@ -1,3 +1,6 @@
+package Tests;
+
+import Model.Scania;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,7 +13,7 @@ public class ScaniaTests {
     public void scaniaTest(int angle) {
         Scania scania = new Scania();
 
-        assertEquals("Scania", scania.getModelName());
+        assertEquals("Model.Scania", scania.getModelName());
         assertEquals(0, scania.getTruckBedAngle());
 
         scania.setTruckBedAngle(angle);

@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 
 public class Saab95 extends Car implements hasTurbo, IDrawable {
@@ -9,7 +11,7 @@ public class Saab95 extends Car implements hasTurbo, IDrawable {
     
     public Saab95(){
 	    turboOn = false;
-        super(2, 125, Color.red, "Saab95", 1.2);
+        super(2, 125, Color.red, "Model.Saab95", 1.2);
     }
 
     @Override
