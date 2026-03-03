@@ -5,6 +5,9 @@ import java.util.Stack;
 import java.util.Vector;
 
 public class CarTransport extends Truck implements ICarStorage<Car> {
+    public int getWidth() { return 100; }
+    public int getHeight() { return 60; }
+
     private final int capacity = 8;
     private Stack<Car> cars = new Stack<>();
 

@@ -1,5 +1,7 @@
 package Model;
 
+import View.IDrawable;
+
 import java.awt.*;
 
 public class Saab95 extends Car implements hasTurbo, IDrawable {

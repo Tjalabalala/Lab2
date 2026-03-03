@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.*;
 
-public abstract class Car implements IVehicle, Movable {
+public abstract class Car implements IVehicle, I2dObject {
     private int nrDoors;
     private Vehicle vehicle;
 

@@ -1,5 +1,7 @@
 package Model;
 
+import View.IDrawable;
+
 import java.awt.*;
 
 public class Scania extends Truck implements hasTruckbed, IDrawable {

@@ -2,7 +2,7 @@ package Model;
 
 import java.awt.*;
 
-public interface IVehicle extends Movable {
+public interface IVehicle extends Movable, I2dObject {
     public String getModelName();
     public double getEnginePower();
     public double getCurrentSpeed();
@@ -12,8 +12,6 @@ public interface IVehicle extends Movable {
 
     public void stopEngine();
 
-    public double getX();
-    public double getY();
     public void setX(double x);
     public void setY(double y);
     public int getAngle();

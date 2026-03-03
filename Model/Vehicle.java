@@ -66,6 +66,9 @@ public class Vehicle implements Movable, IVehicle {
         return this.posY;
     }
 
+    public int getWidth() { return 0; }
+    public int getHeight() { return 0; }
+
     public void setX(double x) {
         this.posX = x;
     }

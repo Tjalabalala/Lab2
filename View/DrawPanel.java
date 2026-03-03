@@ -1,13 +1,12 @@
 package View;
 
-import Model.IDrawable;
+import View.IDrawable;
 
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
-
 public class DrawPanel extends JPanel{
     private final ArrayList<IDrawable> drawables;
 

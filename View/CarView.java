@@ -1,7 +1,7 @@
 package View;
 
 import Controller.CarController;
-import Model.IDrawable;
+import View.IDrawable;
 import Model.ModelListener;
 
 import javax.swing.*;

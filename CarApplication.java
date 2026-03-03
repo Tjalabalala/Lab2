@@ -1,6 +1,7 @@
 import Controller.CarController;
 import Model.*;
 import View.CarView;
+import View.IDrawable;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -76,15 +77,14 @@ public class CarApplication {
         }
     }
 
-    private boolean checkWorkshopCollision(IVehicle car) {
+    private <T extends IVehicle & I2dObject> boolean checkWorkshopCollision(T vehicle) {
         for (Workshop workshop : workshops) {
-            if (car instanceof IDrawable drawableCar
-                    && workshop.overlaps(drawableCar)
-                    && workshop.tryToLoadCar(car)) {
-                ca.drawables.remove(car);
+            if (workshop.overlaps(vehicle) && workshop.tryToLoadCar(vehicle)) {
+                if (vehicle instanceof IDrawable drawable) ca.drawables.remove(drawable);
                 return true;
             }
         }
+
         return false;
     }
 
