@@ -1,8 +1,11 @@
 package View;
 
 import Controller.CarController;
+import Model.Saab95;
+import Model.Volvo240;
 import View.IDrawable;
 import Model.ModelListener;
+import Application.CarApplication;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -11,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -36,6 +40,8 @@ public class CarView extends JFrame implements ModelListener {
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
+    JButton addButton = new JButton("Add car");
+    JButton removeButton = new JButton("Remove car");
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Turbo on");
@@ -90,16 +96,16 @@ public class CarView extends JFrame implements ModelListener {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addButton, 6);
+        controlPanel.add(removeButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
-
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
         startButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(startButton);
-
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
@@ -161,6 +167,25 @@ public class CarView extends JFrame implements ModelListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.raiseBed();
+            }
+        });
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Random rand = new Random();
+                int carNum = rand.nextInt(2);
+                if (carNum == 0)
+                    CarApplication.getInstance().add_car(new Saab95(), rand.nextInt(400), rand.nextInt(400));
+                else
+                    CarApplication.getInstance().add_car(new Volvo240(), rand.nextInt(400), rand.nextInt(400));
+            }
+        });
+
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarApplication.getInstance().remove_first_car();
             }
         });
 

@@ -1,3 +1,5 @@
+package Application;
+
 import Controller.CarController;
 import Model.*;
 import View.CarView;
@@ -29,25 +31,40 @@ public class CarApplication {
     static CarController cc;
 
     static CarApplication ca;
+    public static CarApplication getInstance() { return ca; }
 
-    private <T extends IVehicle & IDrawable> void add_car(T car) {
+    public <T extends IVehicle & IDrawable> void add_car(T car, int x, int y) {
+        car.setX(x);
+        car.setY(y);
+
+        add_car(car);
+    }
+
+    public <T extends IVehicle & IDrawable> void add_car(T car) {
         cars.addVehicle(car);
         drawables.add(car);
+    }
+
+    public void remove_first_car() {
+        IVehicle car = cars.get(0);
+        cars.removeVehicle(car);
+
+        for (int i = 0; i < drawables.size(); i++) {
+            if (drawables.get(i) == car) {
+                drawables.remove(i);
+                break;
+            }
+        }
     }
 
     public static void main(String[] args){
         // Instance of this class
         ca = new CarApplication();
-
         cc = new CarController(cars);
 
-        ca.add_car(new Volvo240());
-        ca.add_car(new Saab95());
-        ca.add_car(new Scania());
-
-        ca.cars.get(0).setY(300);
-        ca.cars.get(1).setY(100); // Model.Saab95
-        ca.cars.get(2).setY(200); // Model.Scania
+        ca.add_car(new Volvo240(), 0, 300);
+        ca.add_car(new Saab95(), 0, 100);
+        ca.add_car(new Scania(), 0, 200);
 
         Workshop<Volvo240> volvoWorkshop = new Workshop<Volvo240>(5, Volvo240.class);
         ca.drawables.add(volvoWorkshop);
