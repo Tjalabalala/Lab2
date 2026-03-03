@@ -56,4 +56,16 @@ public class CarController {
     public void raiseBed(){
         vehicles.raiseBed();
     }
+
+    public void addCar(IVehicle car) {
+        vehicles.addVehicle(car);
+    }
+
+    public IVehicle popFirst() {
+        IVehicle first = vehicles.get(0);
+        vehicles.removeVehicle(first);
+        return first;
+    }
+
+    public int size() { return vehicles.getVehicles().size(); }
 }

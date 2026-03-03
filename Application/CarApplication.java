@@ -31,30 +31,18 @@ public class CarApplication {
     static CarController cc;
 
     static CarApplication ca;
-    public static CarApplication getInstance() { return ca; }
 
-    public <T extends IVehicle & IDrawable> void add_car(T car, int x, int y) {
+    private <T extends IVehicle & IDrawable> void add_car(T car, int x, int y) {
         car.setX(x);
         car.setY(y);
 
+        cc.addCar(car);
         add_car(car);
     }
 
-    public <T extends IVehicle & IDrawable> void add_car(T car) {
+    private <T extends IVehicle & IDrawable> void add_car(T car) {
         cars.addVehicle(car);
         drawables.add(car);
-    }
-
-    public void remove_first_car() {
-        IVehicle car = cars.get(0);
-        cars.removeVehicle(car);
-
-        for (int i = 0; i < drawables.size(); i++) {
-            if (drawables.get(i) == car) {
-                drawables.remove(i);
-                break;
-            }
-        }
     }
 
     public static void main(String[] args){

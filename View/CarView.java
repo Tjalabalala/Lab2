@@ -1,10 +1,8 @@
 package View;
 
 import Controller.CarController;
-import Model.Saab95;
-import Model.Volvo240;
+import Model.*;
 import View.IDrawable;
-import Model.ModelListener;
 import Application.CarApplication;
 
 import javax.swing.*;
@@ -173,19 +171,43 @@ public class CarView extends JFrame implements ModelListener {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (carC.size() >= 10) { return; }
+
                 Random rand = new Random();
                 int carNum = rand.nextInt(2);
-                if (carNum == 0)
-                    CarApplication.getInstance().add_car(new Saab95(), rand.nextInt(400), rand.nextInt(400));
-                else
-                    CarApplication.getInstance().add_car(new Volvo240(), rand.nextInt(400), rand.nextInt(400));
+
+                IVehicle vehicle;
+                IDrawable drawable;
+                if (carNum == 0) {
+                    Saab95 saab = new Saab95();
+                    vehicle = saab;
+                    drawable = saab;
+                }
+                else {
+                    Volvo240 volvo = new Volvo240();
+                    vehicle = volvo;
+                    drawable = volvo;
+                }
+
+                vehicle.setX(rand.nextInt(400));
+                vehicle.setY(rand.nextInt(400));
+                carC.addCar(vehicle);
+                drawPanel.drawables.add(drawable);
             }
         });
 
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarApplication.getInstance().remove_first_car();
+                if (carC.size() == 0) return;
+
+                IVehicle car = carC.popFirst();
+                for (int i = 0; i < drawPanel.drawables.size(); i++) {
+                    if (drawPanel.drawables.get(i) == car) {
+                        drawPanel.drawables.remove(i);
+                        break;
+                    }
+                }
             }
         });
 

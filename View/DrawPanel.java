@@ -8,7 +8,7 @@ import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
 public class DrawPanel extends JPanel{
-    private final ArrayList<IDrawable> drawables;
+    public final ArrayList<IDrawable> drawables;
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, ArrayList<IDrawable> draw) {
