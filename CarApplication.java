@@ -1,5 +1,6 @@
 import Controller.CarController;
 import Model.*;
+import View.CarView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
