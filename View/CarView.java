@@ -2,6 +2,7 @@ package View;
 
 import Controller.CarController;
 import Model.IDrawable;
+import Model.ModelListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
+public class CarView extends JFrame implements ModelListener {
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -52,6 +53,9 @@ public class CarView extends JFrame{
         initComponents(framename);
     }
 
+    public void updateOnAction(){
+        this.drawPanel.repaint();
+    }
     // Sets everything in place and fits everything
     private void initComponents(String title) {
         this.setTitle(title);
@@ -171,5 +175,6 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 }

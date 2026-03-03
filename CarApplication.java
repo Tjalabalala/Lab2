@@ -54,7 +54,7 @@ public class CarApplication {
 
         // Start a new view and send a reference of self
         ca.frame = new CarView("CarSim 1.0", cc, ca.drawables);
-
+        cars.addListener(ca.frame);
         // Start the timer
         ca.timer.start();
     }
@@ -72,7 +72,7 @@ public class CarApplication {
                 if(checkWorkshopCollision(car)) iter.remove();
             }
             //IO.println(cars.get(0).getCurrentSpeed());
-            frame.drawPanel.repaint();
+            cars.moveAll();
         }
     }
 

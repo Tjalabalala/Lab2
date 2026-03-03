@@ -31,6 +31,7 @@ public class VehicleSet {
         for (IVehicle vehicle: vehicles){
             vehicle.move();
         }
+        notifyAllListeners();
     }
 
     public void addVehicle(IVehicle vehicle){

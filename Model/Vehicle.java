@@ -1,9 +1,8 @@
 package Model;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Vehicle implements Movable {
+public class Vehicle implements Movable, IVehicle {
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
@@ -14,7 +13,6 @@ public class Vehicle implements Movable {
     private double posY;
     private final double weight;
     private double speedfactor;
-
 
     public Vehicle(int nr, double ep, Color col, String model, double w) {
         nrDoors = nr;
@@ -126,7 +124,6 @@ public class Vehicle implements Movable {
             this.turnRight();
             this.turnRight();
         }
-        else this.move();
     }
 
 }
