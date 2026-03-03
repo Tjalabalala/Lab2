@@ -61,10 +61,10 @@ public class CarController {
         vehicles.addVehicle(car);
     }
 
-    public IVehicle popFirst() {
+    public int popFirst() {
         IVehicle first = vehicles.get(0);
         vehicles.removeVehicle(first);
-        return first;
+        return 0;
     }
 
     public int size() { return vehicles.getVehicles().size(); }

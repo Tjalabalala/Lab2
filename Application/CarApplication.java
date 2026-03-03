@@ -27,28 +27,28 @@ public class CarApplication {
     static VehicleSet cars = new VehicleSet();
     static WorkshopSet workshops = new WorkshopSet();
     ArrayList<IDrawable> drawables = new ArrayList<>();
-    //ArrayList<Workshop> workshops = new ArrayList<>();
 
     static CarController cc;
 
     static CarApplication ca;
 
-    private <T extends IVehicle & IDrawable> void add_car(T car, int x, int y) {
+    private void add_car(IVehicle car, int x, int y) {
         car.setX(x);
         car.setY(y);
 
         add_car(car);
     }
 
-    private <T extends IVehicle & IDrawable> void add_car(T car) {
+    private void add_car(IVehicle car) {
         cars.addVehicle(car);
-        drawables.add(car);
+        ca.frame.addDrawableVehicle(car);
     }
 
     public static void main(String[] args){
         // Instance of this class
         ca = new CarApplication();
         cc = new CarController(cars);
+        ca.frame = new CarView("CarSim 1.0", cc, ca.drawables);
 
         ca.add_car(new Volvo240(), 0, 300);
         ca.add_car(new Saab95(), 0, 100);
@@ -58,8 +58,6 @@ public class CarApplication {
         ca.drawables.add(volvoWorkshop);
         ca.workshops.add(volvoWorkshop);
 
-        // Start a new view and send a reference of self
-        ca.frame = new CarView("CarSim 1.0", cc, ca.drawables);
         cars.addListener(ca.frame);
         workshops.addActionListener(ca.frame);
         // Start the timer

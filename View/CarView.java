@@ -59,6 +59,10 @@ public class CarView extends JFrame implements ModelListener {
         initComponents(framename);
     }
 
+    public void addDrawableVehicle(IVehicle vehicle) {
+        drawPanel.drawables.add(new DrawableVehicle(vehicle));
+    }
+
     public void updateOnAction(){
         this.drawPanel.repaint();
     }
@@ -184,22 +188,13 @@ public class CarView extends JFrame implements ModelListener {
                 int carNum = rand.nextInt(2);
 
                 IVehicle vehicle;
-                IDrawable drawable;
-                if (carNum == 0) {
-                    Saab95 saab = new Saab95();
-                    vehicle = saab;
-                    drawable = saab;
-                }
-                else {
-                    Volvo240 volvo = new Volvo240();
-                    vehicle = volvo;
-                    drawable = volvo;
-                }
+                if (carNum == 0) vehicle = new Saab95();
+                else vehicle = new Volvo240();
 
                 vehicle.setX(rand.nextInt(400));
                 vehicle.setY(rand.nextInt(400));
                 carC.addCar(vehicle);
-                drawPanel.drawables.add(drawable);
+                addDrawableVehicle(vehicle);
             }
         });
 
@@ -208,13 +203,8 @@ public class CarView extends JFrame implements ModelListener {
             public void actionPerformed(ActionEvent e) {
                 if (carC.size() == 0) return;
 
-                IVehicle car = carC.popFirst();
-                for (int i = 0; i < drawPanel.drawables.size(); i++) {
-                    if (drawPanel.drawables.get(i) == car) {
-                        drawPanel.drawables.remove(i);
-                        break;
-                    }
-                }
+                int car = carC.popFirst();
+                drawPanel.drawables.remove(car);
             }
         });
 
