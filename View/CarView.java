@@ -26,6 +26,7 @@ public class CarView extends JFrame implements ModelListener {
 
     // The controller member
     CarController carC;
+    ArrayList<IDrawable> drawables;
 
     public final DrawPanel drawPanel;
 
@@ -49,6 +50,7 @@ public class CarView extends JFrame implements ModelListener {
     // Constructor
     public CarView(String framename, CarController cc, ArrayList<IDrawable> drawables){
         this.carC = cc;
+        this.drawables = drawables;
         drawPanel = new DrawPanel(X, Y-240, drawables);
         initComponents(framename);
     }
@@ -56,6 +58,11 @@ public class CarView extends JFrame implements ModelListener {
     public void updateOnAction(){
         this.drawPanel.repaint();
     }
+
+    public void removeVehicle(IDrawable drawable){
+        this.drawables.remove(drawable);
+    }
+
     // Sets everything in place and fits everything
     private void initComponents(String title) {
         this.setTitle(title);

@@ -23,8 +23,9 @@ public class CarApplication {
     CarView frame;
 
     static VehicleSet cars = new VehicleSet();
+    static WorkshopSet workshops = new WorkshopSet();
     ArrayList<IDrawable> drawables = new ArrayList<>();
-    ArrayList<Workshop> workshops = new ArrayList<>();
+    //ArrayList<Workshop> workshops = new ArrayList<>();
 
     static CarController cc;
 
@@ -56,6 +57,7 @@ public class CarApplication {
         // Start a new view and send a reference of self
         ca.frame = new CarView("CarSim 1.0", cc, ca.drawables);
         cars.addListener(ca.frame);
+        workshops.addActionListener(ca.frame);
         // Start the timer
         ca.timer.start();
     }
@@ -70,22 +72,14 @@ public class CarApplication {
             while(iter.hasNext()) {
                 IVehicle car = iter.next();
                 car.checkBorderCollision(700);
-                if(checkWorkshopCollision(car)) iter.remove();
+            }
+            for (IVehicle car : workshops.checkWorkshopCollision(cars)){
+                cars.removeVehicle(car);
             }
             //IO.println(cars.get(0).getCurrentSpeed());
             cars.moveAll();
         }
     }
 
-    private <T extends IVehicle & I2dObject> boolean checkWorkshopCollision(T vehicle) {
-        for (Workshop workshop : workshops) {
-            if (workshop.overlaps(vehicle) && workshop.tryToLoadCar(vehicle)) {
-                if (vehicle instanceof IDrawable drawable) ca.drawables.remove(drawable);
-                return true;
-            }
-        }
-
-        return false;
-    }
 
 }
