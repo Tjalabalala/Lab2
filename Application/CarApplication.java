@@ -37,7 +37,6 @@ public class CarApplication {
         car.setX(x);
         car.setY(y);
 
-        cc.addCar(car);
         add_car(car);
     }
 
